@@ -1,24 +1,18 @@
-import ArticleCard from "./component/ArticleCard";
-import { useGetAllArticlesQuery } from "./rtk/apiSlice";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./component/Home";
+import Dashboard from "./component/Dashboard";
 
 function App() {
-  const { data, isLoading } = useGetAllArticlesQuery();
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
   return (
-    <>
-      <div className="flex flex-col gap-4">
-        {data.articles.map((article, index) => (
-          <ArticleCard
-            key={index}
-            author={article.author}
-            title={article.title}
-            content={article.content}
-          />
-        ))}
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Routes>
       </div>
-    </>
+    </Router>
   );
 }
 
